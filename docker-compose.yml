@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  master:
+    build: ./master
+    ports:
+      - "5000:5000"
+    depends_on:
+      - scanner1
+      - scanner2
+      - db
+    environment:
+      FLASK_DEBUG: 0
+    networks:
+      - default
+    restart: always
+
+  scanner1:
+    build: ./scanner1
+    ports:
+      - "5001"
+    environment:
+      FLASK_DEBUG: 0
+    networks:
+      - default
+
+  scanner2:
+    build: ./scanner2
+    ports:
+      - "5002"
+    environment:
+      FLASK_DEBUG: 0
+    networks:
+      - default
+
+  db:
+    build: ./db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: scandb
+    ports:
+      - "5432:5432"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - default
+volumes:
+  dbdata:
+
+networks:
+  default:
+    driver: bridge
