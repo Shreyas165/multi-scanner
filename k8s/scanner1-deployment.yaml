@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scanner1
+spec:
+  replicas: 2 # For redundancy
+  selector:
+    matchLabels:
+      app: scanner1
+  template:
+    metadata:
+      labels:
+        app: scanner1
+    spec:
+      containers:
+        - name: scanner1
+          image: shreyas6/scanner1:latest
+          ports:
+            - containerPort: 5001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: scanner1-service
+spec:
+  selector:
+    app: scanner1
+  ports:
+    - protocol: TCP
+      port: 5001
+      targetPort: 5001
