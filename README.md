@@ -1,5 +1,12 @@
 # Multi-Scanner Application with API Gateway
 NOTE- PROJECT STILL CONTANS SOME ERRORS THAT NEED TO BE FIXED AND CREATE A NEW BRANCH WHEN WORKING ON NEW FEATURES 
+
+
+
+
+
+
+
 This project is a microservice-based application designed to demonstrate a modern, distributed scanning architecture. A central `master` service orchestrates tasks, which are processed by multiple `scanner` services. All results are stored in a PostgreSQL database.
 
 This version has been enhanced with a **Kong API Gateway**, which acts as a secure and managed entry point for all incoming API traffic.
