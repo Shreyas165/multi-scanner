@@ -1,10 +1,37 @@
+
+
 version: '3.8'
 
 services:
+  
+  kong:
+    image: kong:latest               
+    container_name: kong-gateway
+    environment:
+      
+      KONG_DATABASE: 'off'
+      KONG_DECLARATIVE_CONFIG: /etc/kong/kong.yml
+      # Standard logging settings.
+      KONG_PROXY_ACCESS_LOG: /dev/stdout
+      KONG_ADMIN_ACCESS_LOG: /dev/stdout
+      KONG_PROXY_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_LISTEN: 0.0.0.0:8001
+    volumes:
+      
+      - ./kong/kong.yml:/etc/kong/kong.yml
+    ports:
+      
+      - "8000:8000"   
+      - "8443:8443"   
+      - "8001:8001"   
+    networks:
+      - default
+    restart: always
+
   master:
     build: ./master
-    ports:
-      - "5000:5000"
+   
     depends_on:
       - scanner1
       - scanner2
@@ -15,6 +42,7 @@ services:
       - default
     restart: always
 
+  
   scanner1:
     build: ./scanner1
     ports:
@@ -46,6 +74,7 @@ services:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - default
+
 volumes:
   dbdata:
 
