@@ -7,6 +7,11 @@ services:
       - name: scan1
         paths:
           - /scan1
+        plugins:
+          - name: key-auth
+            config:
+              key_names:
+                - x-api-key
 
   - name: scanner2
     url: http://scanner2:5002
@@ -14,3 +19,16 @@ services:
       - name: scan2
         paths:
           - /scan2
+        plugins:
+          - name: key-auth
+            config:
+              key_names:
+                - x-api-key
+
+consumers:
+  - username: myfriend
+    keyauth_credentials:
+      - key: secretkey1
+  - username: you
+    keyauth_credentials:
+      - key: secretkey2
