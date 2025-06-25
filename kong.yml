@@ -1,0 +1,16 @@
+_format_version: "3.0"
+
+services:
+  - name: scanner1
+    url: http://scanner1:5001
+    routes:
+      - name: scan1
+        paths:
+          - /scan1
+
+  - name: scanner2
+    url: http://scanner2:5002
+    routes:
+      - name: scan2
+        paths:
+          - /scan2
