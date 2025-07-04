@@ -1,0 +1,10 @@
+flask==2.2.5
+gunicorn==20.1.0
+llm-guard @ git+https://github.com/protectai/llm-guard.git
+torch==2.4.0
+transformers==4.51.3
+onnxruntime
+scikit-learn==1.6.1
+nltk==3.9.1
+spacy==3.8.7
+werkzeug==2.2.2
