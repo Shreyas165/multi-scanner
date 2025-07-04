@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scanner3
+spec:
+  replicas: 2 # For high availability
+  selector:
+    matchLabels:
+      app: scanner3
+  template:
+    metadata:
+      labels:
+        app: scanner3
+    spec:
+      containers:
+        - name: scanner3
+          image: shreyas6/scanner3:latest
+          ports:
+            - containerPort: 5003
